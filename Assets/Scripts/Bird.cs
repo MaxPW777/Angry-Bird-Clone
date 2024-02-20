@@ -4,7 +4,7 @@ using UnityEngine;
 public class Bird : MonoBehaviour
 {
     [SerializeField] float _launchforce = 500;
-    [SerializeField] float _maxDragDistance = 5;
+    [SerializeField] float _maxDragDistance = 0.3f;
     [SerializeField] ParticleSystem _particleSystem;
 
     Vector2 _startPosition;
