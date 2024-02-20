@@ -50,7 +50,7 @@ public class Bird : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D other) {
         if (!_hasDied) {
-           // _animator.SetBool("Dead",true);
+            _animator.SetBool("Dead",true);
             _hasDied = true;
             _rigidbody2D.freezeRotation = false;
             StartCoroutine(ResetAfterDelay());
@@ -61,7 +61,6 @@ public class Bird : MonoBehaviour
         _particleSystem.Play();
         _spriteRenderer.enabled = false;
         yield return new WaitForSeconds(2);
-        _animator.SetBool("Dead",true);
         _rigidbody2D.freezeRotation = true;
         _rigidbody2D.velocity = Vector2.zero;
         _rigidbody2D.position = _startPosition;
