@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class PiggyController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject terminator;
+    private void OnCollisionEnter2D(Collision2D other)
     {
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (other.relativeVelocity.magnitude > 1 || other.gameObject == terminator) 
+        {
+            Debug.Log("Hit detected with sufficient velocity");
+        }
     }
 }
