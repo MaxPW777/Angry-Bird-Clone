@@ -12,7 +12,8 @@ public class Bird : MonoBehaviour
     SpriteRenderer _spriteRenderer;
     bool _hasDied;
     Animator _animator;
-    void Awake() {
+    void Awake()
+    {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
@@ -23,10 +24,12 @@ public class Bird : MonoBehaviour
         _startPosition = _rigidbody2D.position;
         _rigidbody2D.isKinematic = true;
     }
-    void OnMouseDown() {
+    void OnMouseDown()
+    {
         _spriteRenderer.color = Color.red;
     }
-    void OnMouseUp() {
+    void OnMouseUp()
+    {
         Vector2 currentPosition = _rigidbody2D.position;
         Vector2 direction = _startPosition - currentPosition;
         direction.Normalize();
@@ -34,29 +37,35 @@ public class Bird : MonoBehaviour
         _rigidbody2D.isKinematic = false;
         _rigidbody2D.AddForce(direction * _launchforce);
     }
-    void OnMouseDrag() {
+    void OnMouseDrag()
+    {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 desiredPosition = mousePosition;
         float distance = Vector2.Distance(desiredPosition, _startPosition);
-        if (distance > _maxDragDistance) {
+        if (distance > _maxDragDistance)
+        {
             Vector2 direction = desiredPosition - _startPosition;
             direction.Normalize();
             desiredPosition = _startPosition + (direction * _maxDragDistance);
         }
-        if (desiredPosition.x > _startPosition.x) {
+        if (desiredPosition.x > _startPosition.x)
+        {
             desiredPosition.x = _startPosition.x;
         }
         _rigidbody2D.position = desiredPosition;
     }
-    void OnCollisionEnter2D(Collision2D other) {
-        if (!_hasDied) {
-            _animator.SetBool("Dead",true);
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (!_hasDied)
+        {
+            _animator.SetBool("Dead", true);
             _hasDied = true;
             _rigidbody2D.freezeRotation = false;
             StartCoroutine(ResetAfterDelay());
         }
     }
-    IEnumerator ResetAfterDelay() {
+    IEnumerator ResetAfterDelay()
+    {
         yield return new WaitForSeconds(3);
         _particleSystem.Play();
         _spriteRenderer.enabled = false;
@@ -69,5 +78,6 @@ public class Bird : MonoBehaviour
         yield return new WaitForSeconds(1);
         _spriteRenderer.enabled = true;
         _hasDied = false;
+        _animator.SetBool("Dead", false);
     }
 }
