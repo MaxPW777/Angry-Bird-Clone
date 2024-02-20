@@ -4,13 +4,25 @@ using UnityEngine;
 
 public class PiggyController : MonoBehaviour
 {
+    private Gamemanager gamemanager;
+    SpriteRenderer spriteRenderer;
+    int score;
+
+    [SerializeField] private PigSO pigSO;
     [SerializeField] private GameObject terminator;
+
+    private void Start() {
+        gamemanager = FindObjectOfType<Gamemanager>();
+        score = pigSO.score;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = pigSO.sprite;
+    }
     private void OnCollisionEnter2D(Collision2D other)
     {
         
-        if (other.relativeVelocity.magnitude > 1 || other.gameObject == terminator) 
+        if (other.relativeVelocity.magnitude > 2 || other.gameObject == terminator) 
         {
-            Debug.Log("Hit detected with sufficient velocity");
+            gamemanager.addScore(score);
         }
     }
 }

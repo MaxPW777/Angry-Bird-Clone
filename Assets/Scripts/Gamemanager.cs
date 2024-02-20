@@ -11,4 +11,12 @@ public class Gamemanager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI scoreText;
     
+
+    public void addScore(int amount){
+        score += amount;
+        UpdateScore();
+    }
+    private void UpdateScore(){
+        scoreText.text = score.ToString();
+    }
 }
