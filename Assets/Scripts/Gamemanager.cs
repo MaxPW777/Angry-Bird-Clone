@@ -25,7 +25,7 @@ public class Gamemanager : MonoBehaviour
         AlivePigs--;
         if (AlivePigs == 0)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings);
         }
 
     }

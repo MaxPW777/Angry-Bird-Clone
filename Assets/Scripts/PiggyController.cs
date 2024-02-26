@@ -30,8 +30,12 @@ public class PiggyController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log(polygonCollider.points.ToString());
-        if ((other.relativeVelocity.magnitude > 2 || other.gameObject == terminator) && isAlive) 
+        ContactPoint2D contact = other.GetContact(0); // Obtenez le premier point de contact
+
+        // Convertir les coordonnées du point de contact du monde vers les coordonnées locales de l'objet
+        Vector3 pointOfContactLocal = transform.InverseTransformPoint(contact.point);
+
+        if ((other.relativeVelocity.magnitude > 2 || other.gameObject == terminator || pointOfContactLocal.y > 0.3f && other.relativeVelocity.magnitude > 2) && isAlive) 
         {
             isAlive = false; 
             spriteRenderer.sprite = pigSO.deadSprite;
