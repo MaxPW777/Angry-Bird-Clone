@@ -44,7 +44,7 @@ IEnumerator DeathAnimation()
         yield return new WaitForSeconds(3);
         _particleSystem.Play();
         spriteRenderer.enabled = false;
-        gamemanager.pigDied(score);
+        gamemanager.PigDied(score);
         collider.enabled = false;
         _rigidbody2D.isKinematic = true;
         yield return new WaitForSeconds(1);
