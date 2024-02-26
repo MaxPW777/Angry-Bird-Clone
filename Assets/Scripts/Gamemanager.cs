@@ -11,10 +11,14 @@ public class Gamemanager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI scoreText;
     
+    public void Start(){
+        AlivePigs = FindObjectsOfType<PiggyController>().Length;
+    }
 
-    public void addScore(int amount){
+    public void pigDied(int amount){
         score += amount;
         UpdateScore();
+        AlivePigs--;
     }
     private void UpdateScore(){
         scoreText.text = score.ToString();

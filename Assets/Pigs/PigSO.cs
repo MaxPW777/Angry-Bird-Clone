@@ -5,4 +5,5 @@ public class PigSO : ScriptableObject
 {
     public int score;
     public Sprite sprite;
+    public Sprite deadSprite;
 }
