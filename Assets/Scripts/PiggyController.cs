@@ -16,6 +16,7 @@ public class PiggyController : MonoBehaviour
     [SerializeField] private GameObject terminator;
     [SerializeField] private ParticleSystem _particleSystem;
     private Rigidbody2D _rigidbody2D;
+    private PolygonCollider2D collider;
 
     private void Start() {
         gamemanager = FindObjectOfType<Gamemanager>();
@@ -24,6 +25,7 @@ public class PiggyController : MonoBehaviour
         spriteRenderer.sprite = pigSO.sprite;
         polygonCollider = GetComponent<PolygonCollider2D>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        collider = GetComponent<PolygonCollider2D>();
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -43,10 +45,11 @@ IEnumerator DeathAnimation()
         _particleSystem.Play();
         spriteRenderer.enabled = false;
         gamemanager.pigDied(score);
-        yield return new WaitForSeconds(2);
+        collider.enabled = false;
+        _rigidbody2D.isKinematic = true;
+        yield return new WaitForSeconds(1);
         _rigidbody2D.freezeRotation = true;
         _rigidbody2D.velocity = Vector2.zero;
-        _rigidbody2D.isKinematic = true;
         _rigidbody2D.rotation = 0;
         gameObject.SetActive(false);
     }
